@@ -11,9 +11,30 @@ function assertString(input) {
   }
 }
 
-module.exports = function (a, b) {
+function assertAlgo(algo) {
+  if (!['cosine_sim', 'leven'].includes(algo)) {
+    throw new Error('algo can be any one of the following: [cosine_sim, leven]');
+  }
+}
+
+module.exports = function (a, b, algo = 'cosine_sim') {
   assertString(a);
   assertString(b);
+  assertAlgo(algo);
 
-  return cosineSimilarity(normalizeString(a), normalizeString(b));
+  let confidence = 0;
+
+  if (algo === 'cosine_sim') {
+    confidence = cosineSimilarity(normalizeString(a), normalizeString(b));
+  } else {
+    confidence = 100;
+  }
+
+  return {
+    confidence,
+    algo,
+    percentage() {
+      return Number((confidence * 100).toFixed(2));
+    }
+  }
 }
