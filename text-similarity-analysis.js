@@ -1,5 +1,6 @@
 import sw from 'stopword';
 import cosineSimilarity from './algos/cosine-similarity';
+import leven from './algos/leven';
 
 function normalizeString(string) {
   return sw.removeStopwords(string.split(' ')).join(' ').toLowerCase();
@@ -17,24 +18,15 @@ function assertAlgo(algo) {
   }
 }
 
+// eslint-disable-next-line func-names
 module.exports = function (a, b, algo = 'cosine_sim') {
   assertString(a);
   assertString(b);
   assertAlgo(algo);
 
-  let confidence = 0;
-
   if (algo === 'cosine_sim') {
-    confidence = cosineSimilarity(normalizeString(a), normalizeString(b));
-  } else {
-    confidence = 100;
+    return cosineSimilarity(normalizeString(a), normalizeString(b));
   }
 
-  return {
-    confidence,
-    algo,
-    percentage() {
-      return Number((confidence * 100).toFixed(2));
-    }
-  }
-}
+  return leven(normalizeString(a), normalizeString(b));
+};

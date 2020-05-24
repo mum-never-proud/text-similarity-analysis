@@ -29,9 +29,13 @@
   "homepage": "https://github.com/mum-never-proud/text-similarity-analysis#readme",
   "dependencies": {
     "cosine-similarity": "mum-never-proud/cosine-similarity#master",
+    "leven": "mum-never-proud/leven#master",
     "stopword": "1.0.1"
   },
   "devDependencies": {
+    "eslint": "6.8.0",
+    "eslint-config-airbnb-base": "14.1.0",
+    "eslint-plugin-import": "2.20.2",
     "parcel": "1.12.4"
   }
 }
