@@ -1,0 +1,37 @@
+{
+  "name": "text-similarity-analysis",
+  "version": "1.0.0",
+  "description": "checks if two string matches approximately rather than exactly",
+  "main": "text-similarity-analysis.js",
+  "scripts": {
+    "build": "parcel build text-similarity-analysis.js --global '$tsa'",
+    "dev": "parcel watch text-similarity-analysis.js --global '$tsa'",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mum-never-proud/text-similarity-analysis.git"
+  },
+  "keywords": [
+    "cosine",
+    "cos",
+    "similarity",
+    "approx",
+    "text",
+    "fuzzy",
+    "search"
+  ],
+  "author": "mum-never-proud",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mum-never-proud/text-similarity-analysis/issues"
+  },
+  "homepage": "https://github.com/mum-never-proud/text-similarity-analysis#readme",
+  "dependencies": {
+    "cosine-similarity": "mum-never-proud/cosine-similarity#master",
+    "stopword": "1.0.1"
+  },
+  "devDependencies": {
+    "parcel": "1.12.4"
+  }
+}
