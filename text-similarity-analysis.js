@@ -1,39 +1,19 @@
 import sw from 'stopword';
-import cosineSimilarity from 'cosine-similarity';
+import cosineSimilarity from './algos/cosine-similarity';
 
-function wordFrequencies(string = '', dict) {
-  const frequencies = {},
-    words = string.split(' ');
-
-  Object.keys(dict).forEach(key => {
-    frequencies[key] = 0;
-
-    words.forEach(word => {
-      if (word === key) {
-        frequencies[key]++;
-      }
-    });
-  });
-
-  return {
-    values() {
-      return Object.values(frequencies);
-    }
-  };
+function normalizeString(string) {
+  return sw.removeStopwords(string.split(' ')).join(' ').toLowerCase();
 }
 
-function createDictionary(...words) {
-  const dict = {};
-
-  sw.removeStopwords(words).forEach(word => dict[word] = true);
-
-  return dict;
+function assertString(input) {
+  if (typeof input !== 'string') {
+    throw new TypeError('similarity can be computed only between two strings');
+  }
 }
 
 module.exports = function (a, b) {
-  const dict = createDictionary(...a.toLowerCase().split(' '), ...b.toLowerCase().split(' ')),
-    frequencyA = wordFrequencies(a.toLowerCase(), dict).values(),
-    frequencyB = wordFrequencies(b.toLowerCase(), dict).values();
+  assertString(a);
+  assertString(b);
 
-  return cosineSimilarity(frequencyA, frequencyB);
+  return cosineSimilarity(normalizeString(a), normalizeString(b));
 }
