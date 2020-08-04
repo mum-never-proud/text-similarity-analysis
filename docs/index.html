@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>text similarity analysis</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap" rel="stylesheet" />
+  <style>
+    html,
+    body {
+      font-family: "Fira Code";
+      background-color: #121212;
+      color: #FB3;
+    }
+
+    h1,
+    h3,
+    h6 {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 32px;
+    }
+
+    h3 {
+      font-size: 24px;
+    }
+
+    textarea.form-control, textarea.form-control:focus, textarea.form-control[readonly] {
+      background-color: #222831;
+      border: 1px solid #FB3;
+      color: #FB3;
+      outline: none;
+      resize: none;
+    }
+
+    .btn-primary:disabled {
+      cursor: not-allowed;
+    }
+
+    footer {
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <p class="display-4 text-center mt-3">text similarity analysis</p>
+        <p class="text-center font-italic mt-3">Levenshtein distance vs Cosine similarity</p>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="alert alert-info text-center" role="alert">
+          <p>Stopwords are removed during comparison!</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <p>Sentence A</p>
+        <textarea id="sentence-a" rows="15" class="form-control" autocomplete="off">Julie loves me more than Linda loves me</textarea>
+      </div>
+      <div class="col-12 mt-3 mt-md-0 col-md-6">
+        <p>Sentence B</p>
+        <textarea id="sentence-b" rows="15" class="form-control" autocomplete="off">Jane likes me more than Julie loves me</textarea>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <button id="analyze" class="btn btn-primary">Analyze</button>
+      </div>
+      <div class="col-12 mt-3 d-none" id="tsa-result-container">
+        <p>Cosine similarity: <b><span id="cosine-similarity-result"></span></b></p>
+        <p>Levenshtein distance: <b><span id="levenshtein-distance-result"></span></b></p>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <footer>
+          <p class="text-center font-italic">made with much ❤️</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/gh/mum-never-proud/text-similarity-analysis/dist/text-similarity-analysis.js"></script>
+  <script>
+    (function () {
+      const sentenceA = document.getElementById('sentence-a');
+      const sentenceB = document.getElementById('sentence-b');
+      const analyze = document.getElementById('analyze');
+      const resultContainer = document.getElementById('tsa-result-container');
+      const cosineSimilarityResult = document.getElementById('cosine-similarity-result');
+      const levenshteinDistanceResult  = document.getElementById('levenshtein-distance-result');
+
+      sentenceA.addEventListener('input', inputHandler);
+      sentenceB.addEventListener('input', inputHandler);
+      analyze.addEventListener('click', function () {
+        const cosineSimilarity = $tsa(sentenceA.value, sentenceB.value);
+        const leven = $tsa(sentenceA.value.trim(), sentenceB.value.trim(), 'leven');
+
+        cosineSimilarityResult.innerHTML = cosineSimilarity.percentage() + '%';
+        levenshteinDistanceResult.innerHTML = leven.percentage() + '%';
+        resultContainer.classList.remove('d-none');
+      });
+
+      function inputHandler() {
+        resultContainer.classList.add('d-none');
+
+        if (!(sentenceA.value && sentenceB.value)) {
+          analyze.setAttribute('disabled', 'disabled');
+        } else {
+          analyze.removeAttribute('disabled');
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
