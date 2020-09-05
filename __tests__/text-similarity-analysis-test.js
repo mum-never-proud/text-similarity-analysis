@@ -1,6 +1,5 @@
-import tsa from '../text-similarity-analysis';
+import tsa from '../src/text-similarity-analysis';
 
-/* eslint-disable no-undef */
 describe('text similarity analysis test', () => {
   it('should throw TypeError when one of the first two params is not a string', () => {
     expect(() => tsa()).toThrow(TypeError);

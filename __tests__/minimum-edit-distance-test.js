@@ -1,6 +1,5 @@
-import leven from '../algos/leven';
+import leven from '../src/algos/leven';
 
-/* eslint-disable no-undef */
 describe('text similarity analysis test', () => {
   const stringA = 'Julie loves me more than Linda loves me';
   const stringB = 'Jane likes me more than Julie loves me';

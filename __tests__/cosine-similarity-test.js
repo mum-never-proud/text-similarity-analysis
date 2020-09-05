@@ -1,6 +1,5 @@
-import cosineSimilarity from '../algos/cosine-similarity';
+import cosineSimilarity from '../src/algos/cosine-similarity';
 
-/* eslint-disable no-undef */
 describe('text similarity analysis test', () => {
   const stringA = 'Julie loves me more than Linda loves me';
   const stringB = 'Jane likes me more than Julie loves me';

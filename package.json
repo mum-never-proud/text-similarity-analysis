@@ -1,12 +1,13 @@
 {
   "name": "text-similarity-analysis",
   "version": "1.0.0",
-  "description": "checks if two string matches approximately rather than exactly",
-  "main": "text-similarity-analysis.js",
+  "description": "calculate Cosine similarity and Levenshtein distance between two sentences",
+  "main": "./dist/text-similarity-analysis.min.js",
   "scripts": {
-    "build": "parcel build text-similarity-analysis.js --global '$tsa'",
-    "dev": "parcel watch text-similarity-analysis.js --global '$tsa'",
-    "test": "jest"
+    "build": "parcel build ./src/text-similarity-analysis.js --global '$tsa' -o text-similarity-analysis.min.js",
+    "dev": "parcel watch ./src/text-similarity-analysis.js --global '$tsa' -o text-similarity-analysis.min.js",
+    "test": "jest",
+    "test-coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.1.0",
     "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jest": "24.0.0",
     "jest": "26.0.1",
     "parcel": "1.12.4"
   }

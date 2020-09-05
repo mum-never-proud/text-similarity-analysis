@@ -14,7 +14,7 @@ function assertString(input) {
 
 function assertAlgo(algo) {
   if (!['cosine_sim', 'leven'].includes(algo)) {
-    throw new Error('algo can be any one of the following: [cosine_sim, leven]');
+    throw new Error('algo can be either [cosine_sim, leven]');
   }
 }
 
